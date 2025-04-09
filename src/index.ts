@@ -1,57 +1,51 @@
 import type React from 'react';
-import {localessClient} from "@localess/js-client";
+import {loadLocalessSync, LocalessClient, localessClient} from "@localess/js-client";
+import {FONT_BOLD, FONT_NORMAL} from "./console";
+import {LocalessOptions} from "./models";
 
-export type LocalessOptions = {
-  /**
-   * A fully qualified domain name with protocol (http/https) and port.
-   *
-   * Example: https://my-localess.web.app
-   */
-  origin: string;
-  /**
-   * Localess space ID, cna be found in the Localess Space settings
-   */
-  spaceId: string;
-  /**
-   * Localess API token, can be found in the Localess Space settings
-   */
-  token: string;
-  /**
-   * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft
-   */
-  version?: 'draft' | string;
-  /**
-   * Enable debug mode
-   */
-  debug?: boolean;
-
-  components?: Record<string, React.ElementType>;
-  fallbackComponentEnable?: boolean;
-} & {
-  fallbackComponentEnable: true;
-  fallbackComponent?: React.ElementType;
-};
-
+let client: LocalessClient | undefined = undefined
 let components: Record<string, React.ElementType> = {};
-let fallbackComponentEnable: boolean | undefined = undefined;
 let fallbackComponent: React.ElementType | undefined = undefined;
+let enableSync: boolean = false;
 
 export function localessInit(options: LocalessOptions) {
-  const client = localessClient(options);
+  client = localessClient(options);
 
   components = options.components || {};
-  fallbackComponentEnable = options.fallbackComponentEnable;
   fallbackComponent = options.fallbackComponent;
+  if (options.enableSync) {
+    enableSync = true;
+    loadLocalessSync(options.origin)
+  }
+}
+
+export function getLocalessClient(): LocalessClient {
+  if (!client) {
+    console.error('[Localess] No client found. Please check if the Localess is initialized.');
+    throw new Error('[Localess] No client found.');
+  }
+  return client;
 }
 
 export function getComponent(key: string): React.ElementType | undefined {
+  if (Object.hasOwn(components, key)) {
+    console.error(`[Localess] component %c${key}%c can't be found.`, FONT_BOLD, FONT_NORMAL)
+    return undefined;
+  }
   return components[key];
-}
-
-export function isFallbackComponentEnabled(): boolean {
-  return fallbackComponentEnable === true;
 }
 
 export function getFallbackComponent(): React.ElementType | undefined {
   return fallbackComponent;
 }
+
+export function isSyncEnabled(): boolean {
+  return enableSync;
+}
+
+// Client + Edit
+export {llEditable, LocalessClient} from '@localess/js-client'
+// Sync
+export {LocalessSync, EventToApp, EventCallback, EventToAppType} from '@localess/js-client'
+// Models
+export type * from './models';
