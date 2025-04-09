@@ -1,8 +1,4 @@
-# Jet Brains
-.idea
-
 #Node Modules
 node_modules
-
 # Build
 dist

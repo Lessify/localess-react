@@ -21,12 +21,18 @@
   "bugs": {
     "url": "https://github.com/Lessify/localess-react/issues"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "private": false,
   "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts"
+  },
   "peerDependencies": {
     "react": "^17 || ^18 || ^19",
     "react-dom": "^17 || ^18 || ^19"
