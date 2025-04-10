@@ -1,29 +1,7 @@
 import type React from "react";
+import {LocalessClientOptions} from "@localess/js-client";
 
-export type LocalessOptions = {
-  /**
-   * A fully qualified domain name with protocol (http/https) and port.
-   *
-   * Example: https://my-localess.web.app
-   */
-  origin: string;
-  /**
-   * Localess space ID, cna be found in the Localess Space settings
-   */
-  spaceId: string;
-  /**
-   * Localess API token, can be found in the Localess Space settings
-   */
-  token: string;
-  /**
-   * Content version to fetch, leave empty for 'published' or 'draft' for the latest draft
-   */
-  version?: 'draft' | string;
-  /**
-   * Enable debug mode
-   */
-  debug?: boolean;
-
+export type LocalessOptions = LocalessClientOptions & {
   /**
    * Components mapping for Localess Component integration
    */

@@ -8,7 +8,7 @@ export type LocalessComponentProps = {
   links?: Links
 }
 
-const LocalessComponent = forwardRef<HTMLElement, LocalessComponentProps>(({data, links, ...restProps}, ref) => {
+export const LocalessComponent = forwardRef<HTMLElement, LocalessComponentProps>(({data, links, ...restProps}, ref) => {
   if (!data) {
     console.error('LocalessComponent property %cdata%c is not provided.', FONT_BOLD, FONT_NORMAL)
     return <div>LocalessComponent property <b>data</b> is not provided.</div>
@@ -32,5 +32,3 @@ const LocalessComponent = forwardRef<HTMLElement, LocalessComponentProps>(({data
     </p>
   );
 });
-
-export default LocalessComponent;

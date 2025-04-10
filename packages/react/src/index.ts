@@ -3,44 +3,47 @@ import {loadLocalessSync, LocalessClient, localessClient} from "@localess/js-cli
 import {FONT_BOLD, FONT_NORMAL} from "./console";
 import {LocalessOptions} from "./models";
 
-let client: LocalessClient | undefined = undefined
-let components: Record<string, React.ElementType> = {};
-let fallbackComponent: React.ElementType | undefined = undefined;
-let enableSync: boolean = false;
+let _client: LocalessClient | undefined = undefined
+let _components: Record<string, React.ElementType> = {};
+let _fallbackComponent: React.ElementType | undefined = undefined;
+let _enableSync: boolean = false;
 
-export function localessInit(options: LocalessOptions) {
-  client = localessClient(options);
+export function localessInit(options: LocalessOptions): LocalessClient {
+  console.log("localessInit", options);
+  const {components, fallbackComponent, enableSync, ...restOptions} = options;
+  _client = localessClient(restOptions);
 
-  components = options.components || {};
-  fallbackComponent = options.fallbackComponent;
-  if (options.enableSync) {
-    enableSync = true;
-    loadLocalessSync(options.origin)
+  _components = components || {};
+  _fallbackComponent = fallbackComponent;
+  if (enableSync) {
+    _enableSync = true;
+    loadLocalessSync(restOptions.origin)
   }
+  return _client;
 }
 
 export function getLocalessClient(): LocalessClient {
-  if (!client) {
+  if (!_client) {
     console.error('[Localess] No client found. Please check if the Localess is initialized.');
     throw new Error('[Localess] No client found.');
   }
-  return client;
+  return _client;
 }
 
 export function getComponent(key: string): React.ElementType | undefined {
-  if (Object.hasOwn(components, key)) {
+  if (Object.hasOwn(_components, key)) {
     console.error(`[Localess] component %c${key}%c can't be found.`, FONT_BOLD, FONT_NORMAL)
     return undefined;
   }
-  return components[key];
+  return _components[key];
 }
 
 export function getFallbackComponent(): React.ElementType | undefined {
-  return fallbackComponent;
+  return _fallbackComponent;
 }
 
 export function isSyncEnabled(): boolean {
-  return enableSync;
+  return _enableSync;
 }
 
 // Client + Edit
@@ -49,3 +52,5 @@ export {llEditable, LocalessClient} from '@localess/js-client'
 export {LocalessSync, EventToApp, EventCallback, EventToAppType} from '@localess/js-client'
 // Models
 export type * from './models';
+// Component
+export * from './localess-componenet';
