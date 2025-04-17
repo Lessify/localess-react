@@ -4,10 +4,11 @@ import "./globals.css";
 import {localessInit} from "@localess/react";
 
 localessInit({
-  origin: "",
-  spaceId: "",
+  origin: "https://demo.localess.org",
+  spaceId: "MmaT4DL0kJ6nXIILUcQF",
   version: "draft",
-  token: ""
+  token: "Y4rvboPnyzVeC7LddEK5",
+  debug: true
 })
 
 const geistSans = Geist({
