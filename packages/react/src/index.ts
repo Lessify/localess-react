@@ -1,7 +1,7 @@
 import type React from 'react';
-import {loadLocalessSync, LocalessClient, localessClient} from "@localess/js-client";
+import {loadLocalessSync, type LocalessClient, localessClient} from "@localess/js-client";
 import {FONT_BOLD, FONT_NORMAL} from "./console";
-import {LocalessOptions} from "./models";
+import {type LocalessOptions} from "./models";
 
 let _client: LocalessClient | undefined = undefined
 let _components: Record<string, React.ElementType> = {};
@@ -47,9 +47,10 @@ export function isSyncEnabled(): boolean {
 }
 
 // Client + Edit
-export {llEditable, LocalessClient} from '@localess/js-client'
+export {llEditable} from '@localess/js-client'
+export type {LocalessClient} from '@localess/js-client'
 // Sync
-export {LocalessSync, EventToApp, EventCallback, EventToAppType} from '@localess/js-client'
+export type {LocalessSync, EventToApp, EventCallback, EventToAppType} from '@localess/js-client'
 // Models
 export type * from './models';
 // Component

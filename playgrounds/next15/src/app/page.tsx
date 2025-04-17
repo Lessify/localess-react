@@ -1,5 +1,6 @@
-import {getLocalessClient} from "@localess/react";
+import {getLocalessClient, Content} from "@localess/react";
 import {LOCALES} from "@/utils/locales";
+import {Page} from "@/shared/generated/localess";
 
 export default async function Home({searchParams}: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -33,7 +34,7 @@ export default async function Home({searchParams}: {
   );
 }
 
-export async function fetchData(locale?: string) {
+async function fetchData(locale?: string): Promise<Content<Page>> {
   const client = getLocalessClient();
-  return client.getContentBySlug('home', {locale: locale ? locale : undefined});
+  return client.getContentBySlug<Page>('home', {locale: locale ? locale : undefined});
 }

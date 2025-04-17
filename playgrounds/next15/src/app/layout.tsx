@@ -8,7 +8,7 @@ localessInit({
   spaceId: "MmaT4DL0kJ6nXIILUcQF",
   version: "draft",
   token: "Y4rvboPnyzVeC7LddEK5",
-  debug: true
+  debug: false
 })
 
 const geistSans = Geist({
