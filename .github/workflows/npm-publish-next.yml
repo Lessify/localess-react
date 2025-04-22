@@ -7,10 +7,9 @@ on:
     branches: [main]
     # Only build when files in these directories have been changed
     paths:
-      - src/**
-      - package.json
-      - tsconfig.cjs.json
-      - tsconfig.json
+      - packages/react/src/**
+      - packages/react/package.json
+      - packages/react/tsconfig.json
 
 jobs:
   build:
@@ -27,10 +26,10 @@ jobs:
       - name: Install 🔧
         run: npm install
       - name: Build 🏗️
-        run: npm run build:tsup
+        run: npm run build --workspace=@localess/react
       - name: Change version
-        run: npm --no-git-tag-version version prerelease --preid next.$(date +'%Y%m%d-%H%M%S')
+        run: npm --workspace=@localess/react --no-git-tag-version version prerelease --preid next.$(date +'%Y%m%d-%H%M%S')
       - name: Publish package on NPM 📦
-        run: npm publish --access public --tag next
+        run: npm publish --workspace=@localess/react --access public --tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

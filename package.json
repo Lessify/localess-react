@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "build": "npm run build:react",
-    "build:react": "cd packages/react && npm run build"
+    "build:react": "npm run build --workspace=@localess/react"
   },
   "peerDependencies": {
     "react": "^17 || ^18 || ^19",
