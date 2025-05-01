@@ -25,10 +25,12 @@ jobs:
           cache: npm
       - name: Install 🔧
         run: npm install
+      - name: Change version
+        run: |
+          cd packages/react
+          npm --no-git-tag-version version prerelease --preid next.$(date +'%Y%m%d-%H%M%S')
       - name: Build 🏗️
         run: npm run build --workspace=@localess/react
-      - name: Change version
-        run: npm --workspace=@localess/react --no-git-tag-version version prerelease --preid next.$(date +'%Y%m%d-%H%M%S')
       - name: Publish package on NPM 📦
         run: npm publish --workspace=@localess/react --access public --tag next
         env:
