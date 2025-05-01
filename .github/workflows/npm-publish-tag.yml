@@ -26,6 +26,8 @@ jobs:
           cache: npm
       - name: Install 🏗️
         run: npm install
+      - name: Copy Resources 💾
+        run: cp README.md packages/react
       - name: Build 🏗️
         run: npm run build --workspace=@localess/react
       - name: Publish package on NPM 📦
