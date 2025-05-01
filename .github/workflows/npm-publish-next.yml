@@ -10,6 +10,7 @@ on:
       - packages/react/src/**
       - packages/react/package.json
       - packages/react/tsconfig.json
+      - .github/workflows/**
 
 jobs:
   build:
