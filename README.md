@@ -24,10 +24,70 @@ yarn add @localess/react
 
 ## Usage
 
+### Initialize and Visual Editor
+````tsx
+import { localessInit } from "@localess/react";
+import { Page, Header, Teaser, Footer } from "@/components"
 
+localessInit({
+  origin: "https://my-localess.web.app",
+  spaceId: "I1LoVe2LocaLess4Rever",
+  token: "Baz00KaT0KeN8S3CureLL",
+  enableSync: true, //Enable Visual Editor Sync Script,
+  components: {
+    'page': Page,
+    'header': Header,
+    'teaser': Teaser,
+    'footer': Footer,
+  },
+})
+````
 
-### Visual Editor Enable
-TODO
+### React Component
+Example of Header Component with Menu Items
+
+````tsx
+import { llEditable, LocalessComponent } from "@localess/react";
+
+const Header = ({data}) => {
+  return (
+    <nav {...llEditable(data)}>
+      {data.items.map(item => <LocalessComponent key={item._id} data={item} />)}
+    </nav>
+  )
+}
+````
 
 ### Listen for Visual Editor Events
-TODO
+Your application can subscribe to the Localess Visual Editor Events.
+Example from NextJS 15
+
+````tsx
+
+export default async function Page({searchParams}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const {locale} = await searchParams
+  const {data} = await fetchData(locale?.toString());
+  const [ pageData, setPageData ] = useState(data);
+  
+  
+  if (window.localess) {
+    window.localess.on(['input', 'change'], (event) => {
+      if (event.type === 'input' || event.type === 'change') {
+        setPageData(event.data);
+      }
+    });
+  }
+  return (
+    <main {...llEditable(data)}>
+      {data.body.map(item => <LocalessComponent key={item._id} data={item} />)}
+    </main>
+  )
+}
+
+async function fetchData(locale?: string): Promise<Content<Page>> {
+  const client = getLocalessClient(); // Get LocalessClient Initlialized before
+  return client.getContentBySlug<Page>('home', {locale: locale ? locale : undefined});
+}
+````
