@@ -63,6 +63,7 @@ Your application can subscribe to the Localess Visual Editor Events.
 Example from NextJS 15
 
 ````tsx
+import { llEditable, LocalessComponent, getLocalessClient } from "@localess/react";
 
 export default async function Page({searchParams}: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
