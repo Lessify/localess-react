@@ -44,7 +44,7 @@
     "react-dom": "^17 || ^18 || ^19"
   },
   "dependencies": {
-    "@localess/js-client": "0.8.0"
+    "@localess/js-client": "0.8.2-next.20250615-165147.0"
   },
   "devDependencies": {
     "@types/react": "18.3.12",

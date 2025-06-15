@@ -8,7 +8,7 @@ localessInit({
   spaceId: "MmaT4DL0kJ6nXIILUcQF", // Replace it for your spaceId
   version: "draft",
   token: "Y4rvboPnyzVeC7LddEK5", // Replace it for your token
-  debug: false,
+  debug: true,
   enableSync: true,
 })
 
