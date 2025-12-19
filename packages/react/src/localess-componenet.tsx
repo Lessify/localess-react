@@ -4,7 +4,7 @@ import {FONT_BOLD, FONT_NORMAL} from "./console";
 import {getComponent, getFallbackComponent, isSyncEnabled} from "./index";
 
 export type LocalessComponentProps<T extends ContentData = ContentData> = {
-  data?: T
+  data: T
   links?: Links
 }
 
