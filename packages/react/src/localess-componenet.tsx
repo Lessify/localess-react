@@ -1,10 +1,10 @@
 import {forwardRef} from "react";
-import {ContentData, Links, llEditable} from "@localess/js-client";
+import {ContentData, Links, localessEditable} from "@localess/js-client";
 import {FONT_BOLD, FONT_NORMAL} from "./console";
 import {getComponent, getFallbackComponent, isSyncEnabled} from "./index";
 
-export type LocalessComponentProps = {
-  data: ContentData
+export type LocalessComponentProps<T extends ContentData = ContentData> = {
+  data?: T
   links?: Links
 }
 
@@ -16,7 +16,7 @@ export const LocalessComponent = forwardRef<HTMLElement, LocalessComponentProps>
   // Find Component from Mapping
   const Comp = getComponent(data._schema || data.schema);
   if (Comp) {
-    const attr = isSyncEnabled() ? llEditable(data) : {};
+    const attr = isSyncEnabled() ? localessEditable(data) : {};
     return <Comp ref={ref} data={data} links={links} {...attr} {...restProps} />;
   }
   // Try to use Fallback Component

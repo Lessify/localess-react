@@ -32,10 +32,10 @@ export function getLocalessClient(): LocalessClient {
 
 export function getComponent(key: string): React.ElementType | undefined {
   if (Object.hasOwn(_components, key)) {
-    console.error(`[Localess] component %c${key}%c can't be found.`, FONT_BOLD, FONT_NORMAL)
-    return undefined;
+    return _components[key];
   }
-  return _components[key];
+  console.error(`[Localess] component %c${key}%c can't be found.`, FONT_BOLD, FONT_NORMAL)
+  return undefined;
 }
 
 export function getFallbackComponent(): React.ElementType | undefined {
@@ -47,7 +47,7 @@ export function isSyncEnabled(): boolean {
 }
 
 // Client + Edit
-export {llEditable} from '@localess/js-client'
+export {llEditable, llEditableField, localessEditable, localessEditableField} from '@localess/js-client'
 export type {LocalessClient} from '@localess/js-client'
 // Sync
 export type {LocalessSync, EventToApp, EventCallback, EventToAppType} from '@localess/js-client'
