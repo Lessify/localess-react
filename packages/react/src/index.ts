@@ -8,6 +8,11 @@ let _components: Record<string, React.ElementType> = {};
 let _fallbackComponent: React.ElementType | undefined = undefined;
 let _enableSync: boolean = false;
 
+/**
+ * Initialize Localess Client
+ * @param options
+ * @returns LocalessClient
+ */
 export function localessInit(options: LocalessOptions): LocalessClient {
   console.log("localessInit", options);
   const {components, fallbackComponent, enableSync, ...restOptions} = options;
@@ -22,6 +27,10 @@ export function localessInit(options: LocalessOptions): LocalessClient {
   return _client;
 }
 
+/**
+ * Get Localess Client
+ * @returns LocalessClient
+ */
 export function getLocalessClient(): LocalessClient {
   if (!_client) {
     console.error('[Localess] No client found. Please check if the Localess is initialized.');
@@ -30,6 +39,36 @@ export function getLocalessClient(): LocalessClient {
   return _client;
 }
 
+/**
+ * Register Component
+ * @param key - component key
+ * @param component - React Component
+ */
+export function registerComponent(key: string, component: React.ElementType): void {
+  _components[key] = component;
+}
+
+/**
+ * Unregister Component
+ * @param key - component key
+ */
+export function unregisterComponent(key: string): void {
+  delete _components[key];
+}
+
+/**
+ * Set Components
+ * @param components - Record of components
+ */
+export function setComponents(components: Record<string, React.ElementType>): void {
+  _components = components;
+}
+
+/**
+ * Get Component
+ * @param key - component key
+ * @returns React Component
+ */
 export function getComponent(key: string): React.ElementType | undefined {
   if (Object.hasOwn(_components, key)) {
     return _components[key];
@@ -38,10 +77,25 @@ export function getComponent(key: string): React.ElementType | undefined {
   return undefined;
 }
 
+/**
+ * Set Fallback Component
+ * @param fallbackComponent
+ */
+export function setFallbackComponent(fallbackComponent: React.ElementType): void {
+  _fallbackComponent = fallbackComponent;
+}
+
+/**
+ * Get Fallback Component
+ * @returns React Component
+ */
 export function getFallbackComponent(): React.ElementType | undefined {
   return _fallbackComponent;
 }
 
+/**
+ * Check if Sync is enabled
+ */
 export function isSyncEnabled(): boolean {
   return _enableSync;
 }
