@@ -109,3 +109,5 @@ export type {LocalessSync, EventToApp, EventCallback, EventToAppType} from '@loc
 export type * from './models';
 // Component
 export * from './localess-componenet';
+// Rich Text
+export * from './richtext';
