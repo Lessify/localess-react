@@ -17,7 +17,7 @@ import {Code} from "@tiptap/extension-code";
 import {CodeBlockLowlight} from "@tiptap/extension-code-block-lowlight";
 import {Link} from "@tiptap/extension-link";
 
-export function renderToReact(content: ContentRichText): React.ReactNode {
+export function renderRichTextToReact(content: ContentRichText): React.ReactNode {
   return renderToReactElement({
     content,
     extensions: [
