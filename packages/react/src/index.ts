@@ -101,7 +101,7 @@ export function isSyncEnabled(): boolean {
 }
 
 // Client + Edit
-export {llEditable, llEditableField, localessEditable, localessEditableField} from '@localess/js-client'
+export {llEditable, llEditableField, localessEditable, localessEditableField, isBrowser, isServer, isIframe} from '@localess/js-client'
 export type {LocalessClient} from '@localess/js-client'
 // Sync
 export type {LocalessSync, EventToApp, EventCallback, EventToAppType} from '@localess/js-client'
@@ -111,3 +111,4 @@ export type * from './models';
 export * from './localess-componenet';
 // Rich Text
 export * from './richtext';
+// Utils
