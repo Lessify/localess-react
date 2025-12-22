@@ -44,7 +44,7 @@
     "react-dom": "^17 || ^18 || ^19"
   },
   "dependencies": {
-    "@localess/js-client": "0.8.4",
+    "@localess/js-client": "0.8.5",
     "@tiptap/static-renderer": "^3.14.0",
     "@tiptap/html": "^3.14.0",
     "@tiptap/extension-bold": "^3.14.0",
