@@ -1,6 +1,6 @@
 {
   "name": "@localess/react",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "description": "ReactJS JavaScript/TypeScript SDK for Localess's API.",
   "keywords": [
     "localess",
@@ -44,7 +44,7 @@
     "react-dom": "^17 || ^18 || ^19"
   },
   "dependencies": {
-    "@localess/js-client": "0.8.3",
+    "@localess/js-client": "0.8.4",
     "@tiptap/static-renderer": "^3.14.0",
     "@tiptap/html": "^3.14.0",
     "@tiptap/extension-bold": "^3.14.0",
