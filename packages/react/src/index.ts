@@ -1,12 +1,13 @@
 import type React from 'react';
 import {loadLocalessSync, type LocalessClient, localessClient} from "@localess/js-client";
 import {FONT_BOLD, FONT_NORMAL} from "./console";
-import {type LocalessOptions} from "./models";
+import {type LocalessOptions, type ContentAsset} from "./models";
 
 let _client: LocalessClient | undefined = undefined
 let _components: Record<string, React.ElementType> = {};
 let _fallbackComponent: React.ElementType | undefined = undefined;
 let _enableSync: boolean = false;
+let _assetPathPrefix = '';
 
 /**
  * Initialize Localess Client
@@ -17,6 +18,8 @@ export function localessInit(options: LocalessOptions): LocalessClient {
   console.log("localessInit", options);
   const {components, fallbackComponent, enableSync, ...restOptions} = options;
   _client = localessClient(restOptions);
+
+  _assetPathPrefix = `${options.origin}/api/v1/spaces/${options.spaceId}/assets/`;
 
   _components = components || {};
   _fallbackComponent = fallbackComponent;
@@ -98,6 +101,15 @@ export function getFallbackComponent(): React.ElementType | undefined {
  */
 export function isSyncEnabled(): boolean {
   return _enableSync;
+}
+
+/**
+ * Resolve Asset URL
+ * @param asset - ContentAsset
+ * @returns Asset URL
+ */
+export function resolveAsset(asset: ContentAsset) {
+  return `${_assetPathPrefix}${asset.uri}`;
 }
 
 // Client + Edit

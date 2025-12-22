@@ -17,6 +17,11 @@ import {Code} from "@tiptap/extension-code";
 import {CodeBlockLowlight} from "@tiptap/extension-code-block-lowlight";
 import {Link} from "@tiptap/extension-link";
 
+/**
+ * Render Localess Rich Text content to React elements
+ * @param content - The Rich Text content to render
+ * @returns React.ReactNode - The rendered React elements
+ */
 export function renderRichTextToReact(content: ContentRichText): React.ReactNode {
   return renderToReactElement({
     content,
