@@ -1,11 +1,12 @@
 import {forwardRef} from "react";
-import {ContentData, Links, localessEditable} from "@localess/js-client";
+import {ContentData, Links, localessEditable, References} from "@localess/js-client";
 import {FONT_BOLD, FONT_NORMAL} from "./console";
 import {getComponent, getFallbackComponent, isSyncEnabled} from "./index";
 
 export type LocalessComponentProps<T extends ContentData = ContentData> = {
   data: T
   links?: Links
+  references?: References;
 }
 
 export const LocalessComponent = forwardRef<HTMLElement, LocalessComponentProps>(({data, links, ...restProps}, ref) => {
